@@ -1,0 +1,6 @@
+{
+  "name": "China-to-Karachi Business Hub",
+  "description": "Premier B2B & B2C marketplace for imported gadgets, RC vehicles, and electronics with integrated vendor network and smart deal analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
