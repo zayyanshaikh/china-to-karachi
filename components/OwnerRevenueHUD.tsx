@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -7,10 +9,7 @@ import {
   MousePointerClick, 
   Cookie, 
   Clock, 
-  ExternalLink, 
   ShieldCheck, 
-  TrendingUp, 
-  Zap, 
   Play
 } from 'lucide-react';
 import { UserSessionEvent, OwnerRevenueRecord } from '../types';
@@ -43,7 +42,7 @@ export const OwnerRevenueHUD = ({ isOpen, onClose, onRefreshTelemetry }: OwnerRe
   const totalRevenuePkr = revenues.reduce((acc, curr) => acc + curr.amountPkr, 0);
   const totalClicks = sessions.filter((s) => s.interactionType === 'click' || s.interactionType === 'affiliate_hop').length;
   const cookieCount = sessions.filter((s) => s.affiliateCookieTriggered).length;
-  const estUsd = (totalRevenuePkr / 278).toFixed(2); // Approximate PKR to USD exchange rate
+  const estUsd = (totalRevenuePkr / 278).toFixed(2);
 
   const handleSimulateVisitor = () => {
     logTelemetryEvent({
@@ -74,7 +73,6 @@ export const OwnerRevenueHUD = ({ isOpen, onClose, onRefreshTelemetry }: OwnerRe
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           className="relative w-full max-w-4xl bg-slate-900 border border-cyan-500/50 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-cyan-950/60 z-10 my-8 overflow-hidden"
         >
-          {/* Top Header */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-800">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400">
@@ -103,7 +101,6 @@ export const OwnerRevenueHUD = ({ isOpen, onClose, onRefreshTelemetry }: OwnerRe
             </button>
           </div>
 
-          {/* Metric KPI Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-6">
             <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800/80">
               <div className="flex items-center justify-between text-xs text-slate-400 mb-1">
@@ -158,7 +155,6 @@ export const OwnerRevenueHUD = ({ isOpen, onClose, onRefreshTelemetry }: OwnerRe
             </div>
           </div>
 
-          {/* Test Action Bar */}
           <div className="flex items-center justify-between p-3 rounded-xl bg-cyan-950/30 border border-cyan-500/20 mb-6">
             <div className="text-xs text-slate-300">
               <span className="font-semibold text-cyan-300">Live Simulation:</span> Test the hidden telemetry buffer without disrupting casual browsing.
@@ -172,7 +168,6 @@ export const OwnerRevenueHUD = ({ isOpen, onClose, onRefreshTelemetry }: OwnerRe
             </button>
           </div>
 
-          {/* Real-time Session Log Table */}
           <div>
             <div className="flex items-center justify-between mb-2">
               <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
@@ -238,3 +233,5 @@ export const OwnerRevenueHUD = ({ isOpen, onClose, onRefreshTelemetry }: OwnerRe
     </AnimatePresence>
   );
 };
+
+export default OwnerRevenueHUD;

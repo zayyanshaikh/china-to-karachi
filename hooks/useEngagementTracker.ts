@@ -28,10 +28,8 @@ export function useEngagementTracker({
   const modalPingSentRef = useRef<boolean>(false);
   const mouseActivityRef = useRef<number>(0);
 
-  // Send non-blocking engagement ping to backend
   const sendSilentPing = useCallback(
     async (payload: EngagementPayload): Promise<{ affiliateUrl?: string } | void> => {
-      // 1. Silent fallback/in-memory telemetry buffer (for instant zero-lag UI)
       if (payload.productId && payload.productTitle) {
         logTelemetryEvent({
           productId: payload.productId,
@@ -47,45 +45,35 @@ export function useEngagementTracker({
         }
       }
 
-      // 2. Transmit to /api/track-engagement via keepalive fetch / sendBeacon
       try {
         const body = JSON.stringify(payload);
         if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
-          // sendBeacon sends asynchronously without waiting for a server response
           const blob = new Blob([body], { type: 'application/json' });
           navigator.sendBeacon('/api/track-engagement', blob);
         } else {
-          // Non-blocking fetch with keepalive flag
           fetch('/api/track-engagement', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body,
             keepalive: true,
-          }).catch(() => {
-            // Silently ignore network aborts - stealth execution
-          });
+          }).catch(() => {});
         }
       } catch {
-        // Silent catch: User must NEVER see errors or monetization popups
+        // stealth catch
       }
     },
     [onOwnerRevenueUpdated]
   );
 
-  // Reset modal dwell tracker whenever active product changes
   useEffect(() => {
     modalDwellSecondsRef.current = 0;
     modalPingSentRef.current = false;
   }, [activeProduct?.id]);
 
-  // Master engagement heartbeat timer (runs every 1 second)
   useEffect(() => {
     const timer = setInterval(() => {
       totalPageTimeRef.current += 1;
 
-      // 5-second Modal Dwell Rule:
-      // If user spends more than 5 seconds inspecting a product modal,
-      // silently log the high-intent engagement and trigger the affiliate pre-warm
       if (activeProduct && !modalPingSentRef.current) {
         modalDwellSecondsRef.current += 1;
 
@@ -104,7 +92,6 @@ export function useEngagementTracker({
         }
       }
 
-      // Periodic Scroll & Ad-Impression Earning Ping (every 25 seconds of active browsing)
       if (totalPageTimeRef.current > 0 && totalPageTimeRef.current % 25 === 0 && mouseActivityRef.current > 5) {
         sendSilentPing({
           visitorFingerprint: getVisitorFingerprint(),
@@ -112,14 +99,13 @@ export function useEngagementTracker({
           timeSpentSeconds: 25,
           scrollDepthPercentage: maxScrollDepthRef.current,
         });
-        mouseActivityRef.current = 0; // Reset activity burst counter
+        mouseActivityRef.current = 0;
       }
     }, 1000);
 
     return () => clearInterval(timer);
   }, [activeProduct, sendSilentPing]);
 
-  // Track scroll depth silently
   useEffect(() => {
     const handleScroll = () => {
       const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -135,7 +121,6 @@ export function useEngagementTracker({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Track subtle mouse movement activity (verifies real user, not crawler)
   useEffect(() => {
     let throttleTimeout: any = null;
     const handleMouseMove = () => {
@@ -151,7 +136,6 @@ export function useEngagementTracker({
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  // Public trigger for product clicks
   const trackProductClick = useCallback(
     (product: Product) => {
       sendSilentPing({

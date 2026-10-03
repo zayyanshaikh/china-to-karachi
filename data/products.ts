@@ -98,16 +98,15 @@ export const INITIAL_PRODUCTS: Product[] = [
       'Video Quality': '4K UHD 60fps EIS Gimbal',
       'Flight Duration': '35 Minutes per battery',
       'Transmission': '5G Digital FPV (1.2 KM)',
-      'Radar': '360° Omnidirectional Laser',
-      'Spare Props': '4x Extra Sets Included'
+      'Avoidance': '360° Omnidirectional Laser'
     }
   },
   {
     id: 'prod-gadget-04',
     sellerId: 'seller-khi-03',
-    sellerName: 'Karachi Tech Bazaar (Regal Chowk)',
-    title: 'Cyberpunk 100W GaN 4-Port Fast Station with Smart IPS Power Screen',
-    description: 'See exact voltage, wattage, and temperature for your MacBook, iPhone, and Android devices in real-time. Futuristic transparent mechanical case with active cooling.',
+    sellerName: 'Karachi Tech Traders (Clifton Block 2)',
+    title: 'Cyberpunk 100W GaN 4-Port Transparent Fast Charging Station',
+    description: 'See-through cyberpunk enclosure with real-time IPS color wattage screen. Active cooling graphene heat sink. Powers laptops, drones, and phones simultaneously.',
     category: 'Gadgets',
     pricePkr: 7499,
     chinaWholesalePkr: 4200,
@@ -117,87 +116,58 @@ export const INITIAL_PRODUCTS: Product[] = [
     galleryImages: [
       'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=800&q=80'
     ],
-    stockQuantity: 35,
+    stockQuantity: 24,
     originCity: 'Dongguan, China',
     estimatedArrivalDays: 1,
     engagementScore: 1850,
-    rating: 5.0,
+    rating: 4.7,
     reviewCount: 94,
     deliveryKarachiDays: 1,
-    badge: 'Best Tech Gadget',
+    badge: 'Top EDC Tech',
     isFeatured: true,
     specs: {
-      'Output': '100W Max PD 3.0 + QC 4.0',
-      'Screen': '1.3-inch Full Color IPS',
+      'Output': '100W Max PD 3.0 / QC 4.0',
+      'Display': '1.3-inch Full Color IPS Wattage',
       'Ports': '3x USB-C + 1x USB-A 22.5W',
-      'Safety': 'Multi-protect Overcurrent IC'
+      'Safety': 'Auto Surge & Thermal Protection'
     }
   },
   {
-    id: 'prod-rc-05',
-    sellerId: 'seller-khi-01',
-    sellerName: 'Shenzhen Direct Imports KHI',
-    title: 'HSP 94123 1/10 Electric On-Road Drift RC Car (Metal Upgrade Kit)',
-    description: 'High-speed professional drift chassis with carbon fiber shock tower, alloy drive shafts, and ultra-slick drift tires. Tuned for precision corner slides.',
-    category: 'RC_Cars',
-    pricePkr: 24500,
-    chinaWholesalePkr: 15200,
-    originalPricePkr: 29900,
-    affiliateLink: 'https://www.aliexpress.com/item/1005006450123984.html?aff_fcid=c2k_hub_karachi_ref895',
-    directImageUrl: 'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=800&q=80'
-    ],
-    stockQuantity: 9,
-    originCity: 'Shenzhen, China',
-    estimatedArrivalDays: 3,
-    engagementScore: 1640,
-    rating: 4.7,
-    reviewCount: 51,
-    deliveryKarachiDays: 1,
-    badge: 'Pro Drift Spec',
-    specs: {
-      'Scale': '1:10 Full Proportional',
-      'Drive': 'Shaft-Driven 4WD with Ball Diffs',
-      'Top Speed': '60 km/h Slick Drift',
-      'Chassis': 'Reinforced Carbon Polymer'
-    }
-  },
-  {
-    id: 'prod-truck-06',
+    id: 'prod-truck-05',
     sellerId: 'seller-khi-02',
     sellerName: 'Al-Madina Cargo Electronics (Saddar)',
-    title: 'Huina 1580 Full Metal Hydraulic Excavator (Heavy Commercial Grade)',
-    description: 'Full die-cast zinc alloy body weighing over 7.5kg. Unlimited 360-degree turret rotation, realistic smoke generator, and high-pressure hydraulic boom cylinders.',
+    title: 'Huina 1580 Full Metal Hydraulic Commercial Excavator (7.8kg)',
+    description: '7.8kg solid die-cast zinc alloy engineering masterwork. Fully proportional hydraulic arm, 360-degree endless turret rotation, and real smoke generator module.',
     category: 'RC_Trucks',
     pricePkr: 89000,
     chinaWholesalePkr: 58000,
-    originalPricePkr: 110000,
-    affiliateLink: 'https://www.aliexpress.com/item/1005005432190876.html?aff_fcid=c2k_hub_karachi_ref896',
+    originalPricePkr: 105000,
+    affiliateLink: 'https://www.aliexpress.com/item/1005005432190876.html?aff_fcid=c2k_hub_karachi_ref895',
     directImageUrl: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80',
     galleryImages: [
       'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80'
     ],
-    stockQuantity: 4,
+    stockQuantity: 3,
     originCity: 'Guangzhou, China',
-    estimatedArrivalDays: 4,
+    estimatedArrivalDays: 3,
     engagementScore: 3100,
     rating: 5.0,
-    reviewCount: 37,
+    reviewCount: 29,
     deliveryKarachiDays: 1,
-    badge: 'Collector Grade 7.5kg',
+    badge: '7.8kg Solid Zinc Die-Cast',
+    isFeatured: true,
     specs: {
       'Weight': '7.8 kg Solid Zinc Alloy',
       'Channels': '23 Proportional Radio Channels',
-      'Boom Force': 'Real Metal Digging Power',
-      'Smoke System': 'Mineral Oil Simulated Exhaust'
+      'Hydraulics': 'High-Pressure Boom Cylinders',
+      'Sound & Smoke': 'Simulated Exhaust + Engine Rev'
     }
   },
   {
     id: 'prod-gadget-07',
     sellerId: 'seller-khi-03',
-    sellerName: 'Karachi Tech Bazaar (Regal Chowk)',
-    title: 'RGB Transparent Cyberpunk Wireless Gaming Earbuds (Ultra 38ms Low Latency)',
+    sellerName: 'Karachi Tech Traders (Clifton Block 2)',
+    title: 'RGB Transparent Cyberpunk Wireless Gaming Earbuds (Ultra 38ms)',
     description: 'See-through aerospace polycarbonate charging capsule. Custom 13mm titanium diaphragm drivers with intelligent active ENC noise cancellation for crystal clear Karachi voice calls.',
     category: 'Gadgets',
     pricePkr: 4299,
@@ -222,38 +192,24 @@ export const INITIAL_PRODUCTS: Product[] = [
       'Battery Life': '32 Hours Total Playback',
       'Waterproof': 'IPX5 Sweat & Dust Resistance'
     }
-  },
-  {
-    id: 'prod-drone-08',
-    sellerId: 'seller-khi-01',
-    sellerName: 'Shenzhen Direct Imports KHI',
-    title: 'GEPRC CineLog35 V2 HD FPV Cinewhoop Drone (DJI O3 Compatible)',
-    description: 'Acoustic-dampened inverted pusher frame engineered for buttery cinematic footage through tight urban Karachi environments and indoor warehouse shots.',
-    category: 'Drones',
-    pricePkr: 72000,
-    chinaWholesalePkr: 48500,
-    originalPricePkr: 85000,
-    affiliateLink: 'https://www.banggood.com/custlink/33DvK7H89Z',
-    directImageUrl: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80',
-    galleryImages: [
-      'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80'
-    ],
-    stockQuantity: 5,
-    originCity: 'Shenzhen, China',
-    estimatedArrivalDays: 3,
-    engagementScore: 1980,
-    rating: 4.9,
-    reviewCount: 31,
-    deliveryKarachiDays: 1,
-    badge: 'Cinematic FPV Master',
-    specs: {
-      'Frame': '3.5-inch Inverted Pusher CineLog',
-      'Video Transmission': 'DJI O3 Air Unit Ready',
-      'Motors': 'SPEEDX2 2105.5 2650KV',
-      'Top Speed': '115 km/h Acro Mode'
-    }
   }
 ];
+
+export const PRODUCTS = INITIAL_PRODUCTS.map((p) => ({
+  id: p.id,
+  title: p.title,
+  category: p.category.toLowerCase().replace('_', '-'),
+  categoryName: p.category.replace('_', ' '),
+  pricePkr: p.pricePkr,
+  wholesaleCostPkr: p.chinaWholesalePkr,
+  affiliateLink: p.affiliateLink,
+  imageUrl: p.directImageUrl,
+  origin: p.originCity,
+  deliveryDays: p.deliveryKarachiDays,
+  views: p.engagementScore,
+  badge: p.badge || 'Imported Direct',
+  specs: p.specs,
+}));
 
 export const CATEGORIES_DATA = [
   {
@@ -301,3 +257,33 @@ export const CATEGORIES_DATA = [
     textColor: 'text-rose-400'
   }
 ];
+
+export const CATEGORIES = [
+  {
+    id: 'smart-gadgets',
+    name: 'Smart Gadgets',
+    count: '180+ Imports',
+    description: 'GaN fast chargers, transparent EDC gear, cyberpunk audio.',
+  },
+  {
+    id: 'rc-cars',
+    name: 'RC Cars & Drifters',
+    count: '64 Models in KHI',
+    description: 'Brushless 75km/h 4WD buggies, alloy chassis drift racers.',
+  },
+  {
+    id: 'rc-trucks',
+    name: 'RC Trucks & Heavy Haulers',
+    count: '38 Commercial Grades',
+    description: '8x8 military transport trucks, full hydraulic metal diggers.',
+  },
+  {
+    id: 'drones',
+    name: 'Drones & Aerial FPV',
+    count: '45 Aerial Rigs',
+    description: '4K GPS obstacle-avoiding drones, cinewhoops & FPV goggles.',
+  },
+];
+
+
+

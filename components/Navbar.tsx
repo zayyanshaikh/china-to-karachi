@@ -1,11 +1,12 @@
+'use client';
+
 import { useState } from 'react';
+import Link from 'next/link';
 import { 
   Search, 
   ShoppingCart, 
-  Store, 
   Activity, 
   MapPin, 
-  Zap,
   Sparkles
 } from 'lucide-react';
 import { ProductCategory } from '../types';
@@ -35,17 +36,13 @@ export const Navbar = ({
   onSearchChange,
   cartCount,
   onOpenCart,
-  onOpenSellerModal,
   onOpenShareModal,
   onToggleOwnerHud,
   ownerHudOpen,
   liveRevenuePkr,
 }: NavbarProps) => {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80 transition-all">
-      {/* Top micro-bar: Port Qasim & Karachi Cargo Notice */}
       <div className="bg-gradient-to-r from-slate-950 via-slate-900 to-slate-950 px-4 py-1.5 border-b border-slate-800/50 text-[11px] text-slate-400">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -61,7 +58,6 @@ export const Navbar = ({
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Secret Click-to-Earn Revenue Ticker (Toggle HUD) */}
             <button
               onClick={onToggleOwnerHud}
               title="Click to view secret affiliate telemetry engine"
@@ -81,7 +77,6 @@ export const Navbar = ({
         </div>
       </div>
 
-      {/* Main Navigation Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand Logo */}
         <div className="flex items-center gap-3">
@@ -104,7 +99,7 @@ export const Navbar = ({
                 </span>
               </div>
               <p className="text-[10px] text-slate-400 font-medium">
-                Wholesale Gadgets & RC Motors
+                Wholesale Gadgets &amp; RC Motors
               </p>
             </div>
           </div>
@@ -134,7 +129,6 @@ export const Navbar = ({
 
         {/* Right Action Icons & View Switcher */}
         <div className="flex items-center gap-2 sm:gap-3">
-          {/* View Mode Switcher Tabs */}
           <div className="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5 text-xs">
             <button
               onClick={() => onSelectView('marketplace')}
@@ -168,37 +162,6 @@ export const Navbar = ({
             </button>
           </div>
 
-          {/* Quick Category Switchers */}
-          <div className="hidden xl:flex items-center gap-1 text-xs">
-            <button
-              onClick={() => {
-                onSelectView('marketplace');
-                onSelectCategory('All');
-              }}
-              className={`px-2 py-1 rounded-md transition-colors ${
-                activeCategory === 'All'
-                  ? 'bg-slate-800 text-cyan-400 font-semibold'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              All Imports
-            </button>
-            <button
-              onClick={() => {
-                onSelectView('marketplace');
-                onSelectCategory('RC_Cars');
-              }}
-              className={`px-2 py-1 rounded-md transition-colors ${
-                activeCategory === 'RC_Cars'
-                  ? 'bg-slate-800 text-purple-400 font-semibold'
-                  : 'text-slate-400 hover:text-white'
-              }`}
-            >
-              RC Cars
-            </button>
-          </div>
-
-          {/* Share & VIP Growth Trigger */}
           <button
             onClick={onOpenShareModal}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-500/20 to-blue-500/20 hover:from-cyan-500/30 hover:to-blue-500/30 border border-cyan-500/30 text-cyan-300 text-xs font-semibold transition-all cursor-pointer shadow-sm"
@@ -207,7 +170,6 @@ export const Navbar = ({
             <span className="hidden sm:inline">Share &amp;</span> VIP
           </button>
 
-          {/* Cart Icon */}
           <button
             onClick={onOpenCart}
             className="relative p-2 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 hover:text-white transition-all"
@@ -223,7 +185,6 @@ export const Navbar = ({
         </div>
       </div>
 
-      {/* Mobile search bar if on small screen */}
       <div className="md:hidden px-4 pb-2.5">
         <div className="relative">
           <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -239,3 +200,5 @@ export const Navbar = ({
     </header>
   );
 };
+
+export default Navbar;

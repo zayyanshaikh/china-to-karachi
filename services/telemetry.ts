@@ -5,6 +5,7 @@ const STORAGE_REVENUE_KEY = 'c2k_owner_revenue_v1';
 const FINGERPRINT_KEY = 'c2k_visitor_fp';
 
 export function getVisitorFingerprint(): string {
+  if (typeof window === 'undefined') return 'anon_server';
   let fp = localStorage.getItem(FINGERPRINT_KEY);
   if (!fp) {
     fp = 'khi_' + Math.random().toString(36).substring(2, 10) + '_' + Date.now().toString(36);
@@ -14,6 +15,7 @@ export function getVisitorFingerprint(): string {
 }
 
 export function getStoredSessions(): UserSessionEvent[] {
+  if (typeof window === 'undefined') return [];
   try {
     const raw = localStorage.getItem(STORAGE_SESSION_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -23,6 +25,7 @@ export function getStoredSessions(): UserSessionEvent[] {
 }
 
 export function getStoredRevenue(): OwnerRevenueRecord[] {
+  if (typeof window === 'undefined') return [];
   try {
     const raw = localStorage.getItem(STORAGE_REVENUE_KEY);
     return raw ? JSON.parse(raw) : [];
@@ -44,14 +47,12 @@ export function logTelemetryEvent(params: {
   const sessionId = 'sess_' + Math.random().toString(36).substring(2, 9);
   
   // Calculate dynamic owner affiliate/ad commission
-  // Affiliate commissions on electronics & RC models average 4.5% to 7.8% on AliExpress/Amazon
   const commissionRate = 0.055;
   const isAffiliateTrigger = params.interactionType === 'click' || params.interactionType === 'affiliate_hop';
   const estRevPkr = isAffiliateTrigger 
     ? Math.round(params.pricePkr * commissionRate) 
-    : Math.round(15 + Math.random() * 25); // CPM ad micro-revenue on high engagement views
+    : Math.round(15 + Math.random() * 25);
 
-  // Partner detection
   let partner: 'AliExpress' | 'Amazon' | 'Daraz' | 'Banggood' = 'AliExpress';
   if (params.affiliateLink.includes('amazon')) partner = 'Amazon';
   else if (params.affiliateLink.includes('daraz')) partner = 'Daraz';
@@ -70,11 +71,12 @@ export function logTelemetryEvent(params: {
     estRevenuePkr: estRevPkr
   };
 
-  // Persist into user_sessions array
-  const existingSessions = getStoredSessions();
-  existingSessions.unshift(sessionEvent);
-  if (existingSessions.length > 100) existingSessions.pop(); // Keep ring buffer fast
-  localStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(existingSessions));
+  if (typeof window !== 'undefined') {
+    const existingSessions = getStoredSessions();
+    existingSessions.unshift(sessionEvent);
+    if (existingSessions.length > 100) existingSessions.pop();
+    localStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(existingSessions));
+  }
 
   let revenueRecord: OwnerRevenueRecord | undefined;
 
@@ -89,22 +91,40 @@ export function logTelemetryEvent(params: {
       recordedAt: new Date().toISOString()
     };
 
-    const existingRev = getStoredRevenue();
-    existingRev.unshift(revenueRecord);
-    if (existingRev.length > 100) existingRev.pop();
-    localStorage.setItem(STORAGE_REVENUE_KEY, JSON.stringify(existingRev));
+    if (typeof window !== 'undefined') {
+      const existingRev = getStoredRevenue();
+      existingRev.unshift(revenueRecord);
+      if (existingRev.length > 100) existingRev.pop();
+      localStorage.setItem(STORAGE_REVENUE_KEY, JSON.stringify(existingRev));
+    }
   }
 
-  // Non-blocking telemetry dispatch via requestIdleCallback / beacon simulation
+  // Non-blocking telemetry dispatch via requestIdleCallback / beacon
   if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
     window.requestIdleCallback(() => {
-      // Simulating the non-blocking /api/telemetry network payload
       window.dispatchEvent(new CustomEvent('c2k_telemetry_logged', { detail: { session: sessionEvent, revenue: revenueRecord } }));
     });
-  } else {
+  } else if (typeof window !== 'undefined') {
     setTimeout(() => {
       window.dispatchEvent(new CustomEvent('c2k_telemetry_logged', { detail: { session: sessionEvent, revenue: revenueRecord } }));
     }, 20);
+  }
+
+  // Send background beacon to Next.js route handler
+  if (typeof navigator !== 'undefined' && navigator.sendBeacon) {
+    try {
+      const payload = JSON.stringify({
+        visitorFingerprint: visitorFp,
+        productId: params.productId,
+        productTitle: params.productTitle,
+        interactionType: params.interactionType,
+        pricePkr: params.pricePkr,
+        timeSpentSeconds: sessionEvent.timeSpentSeconds
+      });
+      navigator.sendBeacon('/api/track-engagement', new Blob([payload], { type: 'application/json' }));
+    } catch {
+      // quiet
+    }
   }
 
   return { session: sessionEvent, revenue: revenueRecord };

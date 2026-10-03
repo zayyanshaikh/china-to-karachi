@@ -1,15 +1,13 @@
+'use client';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Store, 
   ArrowRight, 
   CheckCircle2, 
-  Upload, 
-  DollarSign, 
   Sparkles, 
-  Building2, 
-  X,
-  Truck
+  X
 } from 'lucide-react';
 import { ProductCategory, Product } from '../types';
 
@@ -83,10 +81,8 @@ export const SellerTeaser = ({ onAddProduct, isOpen, onOpen, onClose }: SellerTe
 
   return (
     <>
-      {/* Visual Bottom Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="relative rounded-3xl border border-purple-500/30 bg-gradient-to-br from-slate-900 via-purple-950/20 to-slate-950 p-8 sm:p-12 lg:p-16 overflow-hidden backdrop-blur-2xl shadow-2xl shadow-purple-950/30">
-          {/* Neon Accent Glows */}
           <div 
             aria-hidden="true" 
             className="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/20 blur-[100px] pointer-events-none" 
@@ -114,7 +110,6 @@ export const SellerTeaser = ({ onAddProduct, isOpen, onOpen, onClose }: SellerTe
                 Connect your imported inventory with thousands of daily buyers across Saddar, Clifton, DHA, and Gulshan. List your RC cars, trucks, drones, or smart gadgets with zero upfront listing fees and integrated COD logistics.
               </p>
 
-              {/* Seller Perks */}
               <div className="grid sm:grid-cols-3 gap-3 pt-2 text-xs text-slate-300 font-medium">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
@@ -147,7 +142,6 @@ export const SellerTeaser = ({ onAddProduct, isOpen, onOpen, onClose }: SellerTe
         </div>
       </section>
 
-      {/* Seller Onboarding Modal */}
       <AnimatePresence>
         {isOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
@@ -176,6 +170,7 @@ export const SellerTeaser = ({ onAddProduct, isOpen, onOpen, onClose }: SellerTe
                 <Sparkles className="w-3.5 h-3.5" />
                 Vendor Showcase Onboarding
               </div>
+
               <h3 className="text-xl font-bold text-white">
                 Showcase Your China Import to Karachi
               </h3>
@@ -265,7 +260,6 @@ export const SellerTeaser = ({ onAddProduct, isOpen, onOpen, onClose }: SellerTe
                     </div>
                   </div>
 
-                  {/* Profit Margin Preview Bar */}
                   <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-between text-xs font-mono">
                     <span className="text-purple-300">Projected Seller Profit:</span>
                     <span className="font-bold text-emerald-400">
@@ -309,3 +303,5 @@ export const SellerTeaser = ({ onAddProduct, isOpen, onOpen, onClose }: SellerTe
     </>
   );
 };
+
+export default SellerTeaser;

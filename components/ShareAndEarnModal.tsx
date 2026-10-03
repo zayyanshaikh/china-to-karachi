@@ -1,10 +1,11 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, 
   Copy, 
   Check, 
-  Share2, 
   Gift, 
   Sparkles, 
   ShieldCheck, 
@@ -15,8 +16,7 @@ import {
   Send, 
   Twitter, 
   Facebook, 
-  Award,
-  Users
+  Award
 } from 'lucide-react';
 import { getVisitorFingerprint } from '../services/telemetry';
 
@@ -27,9 +27,7 @@ interface ShareAndEarnModalProps {
 
 export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) => {
   const [copied, setCopied] = useState(false);
-  const [inviteCount, setInviteCount] = useState(2); // Simulated progress
-
-  // Generate unique personal referral link based on visitor fingerprint
+  const [inviteCount] = useState(2);
   const [referralLink, setReferralLink] = useState('');
 
   useEffect(() => {
@@ -70,7 +68,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}`, '_blank');
   };
 
-  // SaaS Non-Cash Reward Tiers
   const PERKS = [
     {
       invites: 1,
@@ -105,7 +102,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -114,7 +110,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
           className="fixed inset-0 bg-slate-950/85 backdrop-blur-md"
         />
 
-        {/* Modal Window */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -122,7 +117,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className="relative w-full max-w-2xl bg-slate-900 border border-cyan-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-cyan-950/50 z-10 my-8 overflow-hidden font-sans"
         >
-          {/* Ambient Glow */}
           <div 
             aria-hidden="true" 
             className="absolute -top-20 -right-20 w-64 h-64 bg-cyan-500/20 blur-[90px] pointer-events-none" 
@@ -132,7 +126,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
             className="absolute -bottom-20 -left-20 w-64 h-64 bg-purple-500/20 blur-[90px] pointer-events-none" 
           />
 
-          {/* Close button */}
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 rounded-full bg-slate-800 text-slate-400 hover:text-white transition-colors"
@@ -140,7 +133,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
             <X className="w-5 h-5" />
           </button>
 
-          {/* Header */}
           <div className="space-y-2">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-300 text-xs font-mono">
               <Gift className="w-3.5 h-3.5 text-cyan-400" />
@@ -156,7 +148,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
             </p>
           </div>
 
-          {/* Referral Link & 1-Click Copy Bar */}
           <div className="mt-6 space-y-2">
             <label className="block text-xs font-mono uppercase tracking-wider text-slate-400">
               Your Unique Referral Link
@@ -184,7 +175,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
             </div>
           </div>
 
-          {/* Social Share Buttons */}
           <div className="mt-5">
             <div className="text-xs text-slate-400 mb-2">Share directly to your social circles:</div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -222,7 +212,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
             </div>
           </div>
 
-          {/* Gamified SaaS Perk Progress Tier List */}
           <div className="mt-6 pt-5 border-t border-slate-800">
             <div className="flex items-center justify-between mb-3">
               <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
@@ -287,7 +276,6 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
             </div>
           </div>
 
-          {/* Owner Benefit Footer */}
           <div className="mt-5 p-3 rounded-xl bg-purple-950/20 border border-purple-500/20 text-[11px] text-slate-400 flex items-center justify-between">
             <span className="text-purple-300 font-medium">Zero-Cash Cost to Platform:</span>
             <span>All perks are high-perceived-value digital access, preserving 100% affiliate profit margin.</span>
@@ -297,3 +285,5 @@ export const ShareAndEarnModal = ({ isOpen, onClose }: ShareAndEarnModalProps) =
     </AnimatePresence>
   );
 };
+
+export default ShareAndEarnModal;

@@ -1,18 +1,14 @@
+'use client';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   X, 
   ExternalLink, 
   ShoppingCart, 
-  ShieldCheck, 
   Truck, 
-  CheckCircle2, 
-  MapPin, 
   Layers, 
-  Flame, 
-  PhoneCall,
-  Zap,
-  Info
+  Flame 
 } from 'lucide-react';
 import { Product } from '../types';
 import { logTelemetryEvent } from '../services/telemetry';
@@ -55,7 +51,6 @@ export const ProductModal = ({
   return (
     <AnimatePresence>
       <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-        {/* Backdrop */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -64,7 +59,6 @@ export const ProductModal = ({
           className="fixed inset-0 bg-slate-950/80 backdrop-blur-md"
         />
 
-        {/* Modal Window */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -72,7 +66,6 @@ export const ProductModal = ({
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
           className="relative w-full max-w-4xl bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl shadow-cyan-950/40 overflow-hidden z-10 my-8"
         >
-          {/* Close button */}
           <button
             onClick={onClose}
             className="absolute top-4 right-4 z-20 p-2 rounded-full bg-slate-800/80 text-slate-400 hover:text-white hover:bg-slate-700 border border-slate-700 transition-colors"
@@ -131,7 +124,6 @@ export const ProductModal = ({
             {/* Product Details Right Half */}
             <div className="md:col-span-6 p-6 sm:p-8 flex flex-col justify-between space-y-6">
               <div>
-                {/* Category & Badge */}
                 <div className="flex items-center gap-2 text-xs">
                   <span className="px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 font-mono">
                     {product.category.replace('_', ' ')}
@@ -148,7 +140,7 @@ export const ProductModal = ({
                   {product.description}
                 </p>
 
-                {/* Price Breakdown & Wholesale Economics */}
+                {/* Price Breakdown */}
                 <div className="mt-5 p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-2">
                   <div className="flex items-baseline justify-between">
                     <div>
@@ -189,7 +181,6 @@ export const ProductModal = ({
                   </div>
                 </div>
 
-                {/* Karachi Shipping Guarantee */}
                 <div className="mt-4 flex items-center gap-3 p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-200">
                   <Truck className="w-4 h-4 text-purple-400 shrink-0" />
                   <span>
@@ -202,7 +193,6 @@ export const ProductModal = ({
               {/* Action Buttons */}
               <div className="space-y-3 pt-4 border-t border-slate-800">
                 <div className="grid grid-cols-2 gap-3">
-                  {/* Direct Add to Cart */}
                   <button
                     onClick={() => {
                       onAddToCart(product);
@@ -214,7 +204,6 @@ export const ProductModal = ({
                     <span>Order in Karachi (COD)</span>
                   </button>
 
-                  {/* Secret Click-to-Earn Affiliate Link Gateway */}
                   <button
                     onClick={handleExternalSourceClick}
                     className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer"
@@ -235,3 +224,5 @@ export const ProductModal = ({
     </AnimatePresence>
   );
 };
+
+export default ProductModal;

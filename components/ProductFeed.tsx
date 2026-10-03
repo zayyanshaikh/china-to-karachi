@@ -1,15 +1,13 @@
+'use client';
+
 import { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Sparkles, 
   Flame, 
   Eye, 
-  TrendingUp, 
   ShoppingCart, 
   ExternalLink, 
   Truck, 
-  ShieldCheck, 
-  Clock, 
   Zap,
   ArrowUpDown
 } from 'lucide-react';
@@ -36,16 +34,13 @@ export const ProductFeed = ({
   const [sortBy, setSortBy] = useState<'engagement' | 'price_asc' | 'price_desc' | 'margin'>('engagement');
   const [clickedCardId, setClickedCardId] = useState<string | null>(null);
 
-  // Filter and sort items
   const filteredProducts = useMemo(() => {
     let list = [...products];
 
-    // Category filter
     if (activeCategory !== 'All') {
       list = list.filter((p) => p.category === activeCategory);
     }
 
-    // Search query
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       list = list.filter(
@@ -57,7 +52,6 @@ export const ProductFeed = ({
       );
     }
 
-    // Sorting
     switch (sortBy) {
       case 'engagement':
         list.sort((a, b) => b.engagementScore - a.engagementScore);
@@ -80,17 +74,10 @@ export const ProductFeed = ({
     return list;
   }, [products, activeCategory, searchQuery, sortBy]);
 
-  // The Secret Click-to-Earn Trigger:
-  // When card is clicked:
-  // 1. Triggers Framer Motion ripple effect
-  // 2. Secretly opens the hidden affiliate link in a separate background tab (attributing owner's commission)
-  // 3. Asynchronously records the click in the user_sessions telemetry table
-  // 4. Opens the rich product modal in the current tab
   const handleProductCardClick = (product: Product) => {
     setClickedCardId(product.id);
     setTimeout(() => setClickedCardId(null), 400);
 
-    // 1. Log to user_sessions & owner_revenue (Zero-lag async telemetry)
     logTelemetryEvent({
       productId: product.id,
       productTitle: product.title,
@@ -100,19 +87,16 @@ export const ProductFeed = ({
     });
     if (onTelemetryLogged) onTelemetryLogged();
 
-    // 2. Open Hidden Affiliate Link in new tab (Crucial monetization engine)
     try {
       window.open(product.affiliateLink, '_blank', 'noopener,noreferrer');
     } catch {
-      // Fallback if popup blocker intervenes
+      // quiet
     }
 
-    // 3. Open rich in-app Product Modal for seamless shopping
     onSelectProduct(product);
   };
 
   const handleCardHover = (product: Product) => {
-    // Subtle hover telemetry: counts as engagement / ad impression micro-event
     logTelemetryEvent({
       productId: product.id,
       productTitle: product.title,
@@ -162,14 +146,11 @@ export const ProductFeed = ({
         </div>
       </div>
 
-      {/* Masonry / Responsive Product Grid */}
       {filteredProducts.length === 0 ? (
         <div className="text-center py-20 bg-slate-900/40 rounded-2xl border border-slate-800">
           <p className="text-slate-400 text-sm">No import items matched your search criteria.</p>
           <button
-            onClick={() => {
-              setSortBy('engagement');
-            }}
+            onClick={() => setSortBy('engagement')}
             className="mt-3 px-4 py-2 rounded-lg bg-slate-800 text-cyan-400 text-xs font-medium hover:bg-slate-700"
           >
             Reset Filters
@@ -204,27 +185,23 @@ export const ProductFeed = ({
                     <img
                       src={product.directImageUrl}
                       alt={product.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-108 transition-transform duration-500 cursor-pointer"
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 cursor-pointer"
                       onClick={() => handleProductCardClick(product)}
                     />
 
-                    {/* Gradient Overlay for Text Readability */}
                     <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none" />
 
-                    {/* Left Custom Badge */}
                     {product.badge && (
                       <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-slate-950/80 backdrop-blur-md border border-slate-700/80 text-[10px] font-mono font-medium text-cyan-300">
                         {product.badge}
                       </div>
                     )}
 
-                    {/* Live Viewer Dwell Indicator (Addictive Urgency trigger) */}
                     <div className="absolute bottom-3 left-3 flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-slate-950/90 backdrop-blur-md border border-slate-800 text-[10px] text-slate-300 font-mono">
                       <Eye className="w-3 h-3 text-cyan-400" />
                       <span>{(product.engagementScore / 10).toFixed(0)} viewing in KHI</span>
                     </div>
 
-                    {/* Direct Affiliate Redirect Indicator */}
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
@@ -240,7 +217,6 @@ export const ProductFeed = ({
                   {/* Body Content */}
                   <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
                     <div>
-                      {/* Category & Origin */}
                       <div className="flex items-center justify-between text-[11px] text-slate-400 mb-1.5">
                         <span className="font-mono text-purple-400 font-medium">
                           {product.category.replace('_', ' ')}
@@ -251,7 +227,6 @@ export const ProductFeed = ({
                         </span>
                       </div>
 
-                      {/* Product Title */}
                       <h3
                         onClick={() => handleProductCardClick(product)}
                         className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-2 cursor-pointer leading-snug"
@@ -259,7 +234,6 @@ export const ProductFeed = ({
                         {product.title}
                       </h3>
 
-                      {/* Snippet Specs */}
                       <div className="mt-2 grid grid-cols-2 gap-1 text-[11px] text-slate-400 font-mono bg-slate-950/50 p-2 rounded-lg border border-slate-800/60">
                         {Object.entries(product.specs).slice(0, 2).map(([key, val]) => (
                           <div key={key} className="truncate">
@@ -269,7 +243,7 @@ export const ProductFeed = ({
                       </div>
                     </div>
 
-                    {/* Pricing & Click-to-Earn Conversion Trigger */}
+                    {/* Pricing */}
                     <div className="pt-2 border-t border-slate-800/80">
                       <div className="flex items-baseline justify-between">
                         <div>
@@ -290,9 +264,7 @@ export const ProductFeed = ({
                         </div>
                       </div>
 
-                      {/* Action Button Row */}
                       <div className="mt-3 grid grid-cols-4 gap-2">
-                        {/* Primary View & Trigger Button */}
                         <button
                           onClick={() => handleProductCardClick(product)}
                           className="col-span-3 py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-500/20 to-purple-500/20 hover:from-cyan-500/30 hover:to-purple-500/30 border border-cyan-500/30 hover:border-cyan-500/60 text-cyan-300 font-medium text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm"
@@ -301,7 +273,6 @@ export const ProductFeed = ({
                           <span>View Deal &amp; Specs</span>
                         </button>
 
-                        {/* Add to Local Karachi Order Cart */}
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -324,3 +295,5 @@ export const ProductFeed = ({
     </section>
   );
 };
+
+export default ProductFeed;

@@ -7,18 +7,14 @@ import {
   Zap, 
   ArrowRight, 
   Sparkles, 
-  PackageCheck,
-  Cpu,
-  Car,
-  Plane
+  PackageCheck 
 } from 'lucide-react';
 
 export default function HomePage() {
   return (
     <div className="space-y-12 pb-20">
-      {/* 1. Hero Section (3D Glassmorphism & Neon Accent) */}
+      {/* 1. Hero Section (3D Glassmorphism & Neon Cyan/Purple) */}
       <section className="relative overflow-hidden pt-8 pb-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        {/* Neon Ambient Glows */}
         <div 
           aria-hidden="true" 
           className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-cyan-600/15 via-purple-600/20 to-indigo-600/10 blur-[130px] pointer-events-none -z-10" 
@@ -88,7 +84,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            {/* Right Spotlight Visual Card */}
+            {/* Right Spotlight Card */}
             <div className="lg:col-span-4 hidden lg:block">
               <div className="relative rounded-2xl border border-slate-700/60 bg-slate-900/90 p-4 backdrop-blur-xl shadow-xl">
                 <div className="relative aspect-video rounded-xl overflow-hidden bg-slate-950 mb-3">
@@ -105,7 +101,7 @@ export default function HomePage() {
                 <h4 className="text-sm font-bold text-white mt-0.5">WLtoys 4WD 75km/h Racer</h4>
                 <div className="mt-2 flex items-baseline justify-between font-mono">
                   <span className="text-base font-extrabold text-cyan-400">₨ 14,850</span>
-                  <span className="text-[11px] text-emerald-400">+67% Wholesale Margin</span>
+                  <span className="text-[11px] text-emerald-400">+67% Margin</span>
                 </div>
               </div>
             </div>
@@ -156,7 +152,7 @@ export default function HomePage() {
           </span>
         </div>
 
-        {/* Masonry Responsive Grid */}
+        {/* Responsive Grid of Money-Maker Product Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {PRODUCTS.map((product) => (
             <ProductCard key={product.id} product={product} />

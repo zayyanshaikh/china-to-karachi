@@ -1,18 +1,23 @@
 import './globals.css';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import EngagementTracker from '../components/EngagementTracker';
 
-export const metadata = {
-  title: 'China to Karachi Business Hub - Premium Gadgets & RC Vehicles',
-  description: 'Direct wholesale imports from Shenzhen & Yiwu factories cleared at Port Qasim. 24h Express delivery across Karachi.',
+export const metadata: Metadata = {
+  title: 'China-to-Karachi Business Hub',
+  description: 'Premier B2B & B2C marketplace for imported gadgets, RC vehicles, and electronics with integrated vendor network and smart deal analytics.',
   openGraph: {
-    title: 'China to Karachi Business Hub',
-    description: 'Premier B2B & B2C marketplace for imported gadgets, RC vehicles, and electronics with integrated vendor network.',
+    title: 'China-to-Karachi Business Hub',
+    description: 'Premier B2B & B2C marketplace for imported gadgets, RC vehicles, and electronics with integrated vendor network and smart deal analytics.',
     type: 'website',
   },
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en" className="dark">
       <head>
@@ -52,7 +57,6 @@ export default function RootLayout({ children }) {
         {/* Global Header Navigation */}
         <header className="sticky top-0 z-40 backdrop-blur-xl bg-slate-950/80 border-b border-slate-800/80">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
-            {/* Logo */}
             <Link href="/" className="group flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-cyan-500 via-indigo-600 to-purple-600 p-[1px] shadow-lg shadow-cyan-500/20 group-hover:shadow-cyan-500/40 transition-shadow">
                 <div className="w-full h-full bg-slate-950 rounded-[11px] flex items-center justify-center font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-400 text-sm">
@@ -74,7 +78,7 @@ export default function RootLayout({ children }) {
               </div>
             </Link>
 
-            {/* Category Nav Links */}
+            {/* Category Nav Links (Next.js File-Based Routing) */}
             <nav className="hidden md:flex items-center gap-1 text-xs">
               <Link
                 href="/category/rc-cars"
@@ -102,7 +106,6 @@ export default function RootLayout({ children }) {
               </Link>
             </nav>
 
-            {/* Quick Sourcing Badge */}
             <div className="flex items-center gap-2">
               <span className="px-2.5 py-1 rounded-lg bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 text-xs font-mono">
                 Port Qasim Ready

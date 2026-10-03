@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'motion/react';
 import { 
   Zap, 
@@ -5,8 +7,6 @@ import {
   Truck, 
   ArrowRight, 
   Sparkles, 
-  Plane, 
-  Radio, 
   PackageCheck 
 } from 'lucide-react';
 import { ProductCategory } from '../types';
@@ -110,7 +110,6 @@ export const Hero = ({ onSelectCategory, onExploreClick, onOpenSellerModal }: He
             {/* Right Interactive 3D Showcase Card */}
             <div className="lg:col-span-5">
               <div className="relative group">
-                {/* Glow ring */}
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 opacity-30 group-hover:opacity-60 blur-xl transition duration-500" />
                 
                 <div className="relative rounded-2xl border border-slate-700/60 bg-slate-900/90 p-5 backdrop-blur-xl space-y-4">
@@ -173,3 +172,5 @@ export const Hero = ({ onSelectCategory, onExploreClick, onOpenSellerModal }: He
     </section>
   );
 };
+
+export default Hero;

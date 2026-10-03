@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
@@ -5,10 +7,7 @@ import {
   Trash2, 
   ShoppingBag, 
   Truck, 
-  CheckCircle2, 
-  MapPin, 
-  ShieldCheck,
-  Phone
+  CheckCircle2 
 } from 'lucide-react';
 import { Product } from '../types';
 
@@ -68,7 +67,6 @@ export const CartDrawer = ({
           transition={{ type: 'spring', damping: 25, stiffness: 250 }}
           className="relative w-full max-w-md bg-slate-900 border-l border-slate-800 shadow-2xl p-6 flex flex-col justify-between z-10 h-full overflow-y-auto"
         >
-          {/* Header */}
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-slate-800">
               <div className="flex items-center gap-2">
@@ -84,7 +82,6 @@ export const CartDrawer = ({
               </button>
             </div>
 
-            {/* Content */}
             {ordered ? (
               <div className="py-20 text-center space-y-3">
                 <div className="w-16 h-16 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
@@ -140,7 +137,6 @@ export const CartDrawer = ({
                   </div>
                 ))}
 
-                {/* Checkout COD Form */}
                 <form onSubmit={handlePlaceOrder} className="pt-4 border-t border-slate-800 space-y-3">
                   <h4 className="text-xs font-mono uppercase tracking-wider text-slate-400">
                     Karachi Delivery Information
@@ -200,7 +196,6 @@ export const CartDrawer = ({
                     />
                   </div>
 
-                  {/* Summary & Price */}
                   <div className="p-3 rounded-xl bg-slate-950 border border-slate-800 space-y-1 text-xs">
                     <div className="flex justify-between text-slate-400">
                       <span>Items Subtotal:</span>
@@ -232,3 +227,5 @@ export const CartDrawer = ({
     </AnimatePresence>
   );
 };
+
+export default CartDrawer;

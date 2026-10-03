@@ -1,5 +1,6 @@
+'use client';
+
 import { useState } from 'react';
-import { motion } from 'motion/react';
 import { 
   Store, 
   TrendingUp, 
@@ -9,15 +10,8 @@ import {
   Plus, 
   Package, 
   Sparkles, 
-  ExternalLink, 
-  ArrowUpRight, 
-  ShieldCheck, 
-  Layers, 
   UploadCloud, 
-  CheckCircle2, 
-  RefreshCw,
-  HelpCircle,
-  Clock
+  CheckCircle2 
 } from 'lucide-react';
 import { Product, ProductCategory } from '../types';
 
@@ -42,7 +36,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
 
   const [uploadSuccess, setUploadSuccess] = useState(false);
 
-  // Calculate live aggregate stats for Seller
   const totalViews = products.reduce((acc, p) => acc + p.engagementScore * 3, 4290);
   const totalClicks = products.reduce((acc, p) => acc + Math.round(p.engagementScore * 0.42), 612);
   const estEarningsPkr = products.reduce((acc, p) => acc + (p.pricePkr - p.chinaWholesalePkr) * 2.8, 184500);
@@ -102,7 +95,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
 
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 font-sans">
-      {/* Top Header & Breadcrumb */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
         <div>
           <div className="flex items-center gap-2 text-xs font-mono text-purple-400 mb-1">
@@ -127,9 +119,7 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
         </button>
       </div>
 
-      {/* SaaS Analytics KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Metric 1 */}
         <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl relative overflow-hidden group hover:border-slate-700 transition-all">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Products Viewed</span>
@@ -146,7 +136,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
           </div>
         </div>
 
-        {/* Metric 2 */}
         <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl relative overflow-hidden group hover:border-slate-700 transition-all">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Clicks Generated</span>
@@ -162,7 +151,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
           </div>
         </div>
 
-        {/* Metric 3 */}
         <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl relative overflow-hidden group hover:border-slate-700 transition-all">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Estimated Seller Earnings</span>
@@ -178,7 +166,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
           </div>
         </div>
 
-        {/* Metric 4 */}
         <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-xl relative overflow-hidden group hover:border-slate-700 transition-all">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Active Karachi Listings</span>
@@ -195,9 +182,7 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
         </div>
       </div>
 
-      {/* Main 2-Column Section: Upload Form (Left) & Active Listings (Right) */}
       <div className="grid lg:grid-cols-12 gap-8 items-start">
-        {/* Upload Form (The Seller Hook) */}
         <div className="lg:col-span-5 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-7 backdrop-blur-xl shadow-xl">
           <div className="flex items-center gap-2 mb-1">
             <div className="w-6 h-6 rounded-lg bg-purple-500/20 text-purple-400 flex items-center justify-center">
@@ -290,7 +275,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
               </div>
             </div>
 
-            {/* Profit Margin Preview Bar */}
             <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-between text-xs font-mono">
               <span className="text-purple-300">Projected Margin:</span>
               <span className="font-bold text-emerald-400">
@@ -298,7 +282,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
               </span>
             </div>
 
-            {/* THE CRUCIAL HOOK FOR SELLERS */}
             <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-950/40 via-slate-950 to-cyan-950/30 border border-purple-500/40 space-y-2">
               <div className="flex items-center justify-between">
                 <label className="block text-xs font-bold text-purple-300">
@@ -317,7 +300,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
                 className="w-full px-3.5 py-2 bg-slate-900 border border-purple-500/30 rounded-xl text-xs text-purple-200 placeholder:text-slate-500 focus:outline-none focus:border-purple-400 font-mono"
               />
 
-              {/* The Seller Hook Message */}
               <div className="flex items-start gap-2 pt-1 text-[11px] text-slate-300 leading-snug">
                 <Sparkles className="w-3.5 h-3.5 text-cyan-400 shrink-0 mt-0.5" />
                 <p>
@@ -362,7 +344,6 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
           </form>
         </div>
 
-        {/* Active Product Inventory Table (Right) */}
         <div className="lg:col-span-7 bg-slate-900/90 border border-slate-800 rounded-3xl p-6 sm:p-7 backdrop-blur-xl shadow-xl space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-slate-800">
             <div>
@@ -435,3 +416,5 @@ export const SellerDashboard = ({ products, onAddProduct, onNavigateHome }: Sell
     </div>
   );
 };
+
+export default SellerDashboard;

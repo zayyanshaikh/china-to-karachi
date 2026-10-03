@@ -1,17 +1,12 @@
+'use client';
+
 import { useState } from 'react';
 import { 
-  User, 
   Package, 
   Heart, 
-  Share2, 
   Copy, 
   Check, 
   Truck, 
-  Clock, 
-  ShieldCheck, 
-  Sparkles, 
-  ExternalLink, 
-  ArrowRight,
   Gift
 } from 'lucide-react';
 import { Product } from '../types';
@@ -35,7 +30,6 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
     }
   };
 
-  // Mock authentic Karachi buyer orders
   const mockOrders = [
     {
       id: 'ORD-KHI-9421',
@@ -61,7 +55,6 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
 
   return (
     <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-8 font-sans">
-      {/* Top Profile Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
         <div className="flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-cyan-500 via-indigo-600 to-purple-600 p-[2px] shadow-lg shadow-cyan-500/20">
@@ -92,7 +85,6 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
         </button>
       </div>
 
-      {/* VIRAL REFERRAL SECTION */}
       <div className="relative rounded-3xl border border-cyan-500/40 bg-gradient-to-br from-slate-900 via-cyan-950/20 to-slate-950 p-6 sm:p-8 backdrop-blur-2xl shadow-xl overflow-hidden">
         <div 
           aria-hidden="true" 
@@ -114,7 +106,6 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
               Share your link with hobbyists and gadget enthusiasts in Karachi. When your friends order an imported RC car, truck, or drone, you unlock <strong>₨ 1,000 instant store credit</strong> and free same-day COD delivery.
             </p>
 
-            {/* Link Copy Widget */}
             <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 max-w-xl">
               <div className="flex-1 px-3.5 py-2.5 bg-slate-950/90 border border-slate-800 rounded-xl text-xs font-mono text-cyan-300 truncate">
                 {referralLink}
@@ -138,7 +129,6 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
             </div>
           </div>
 
-          {/* Referral Stats Counter */}
           <div className="lg:col-span-4 grid grid-cols-2 gap-3">
             <div className="p-4 rounded-2xl bg-slate-950/70 border border-slate-800/80 text-center">
               <div className="text-xs text-slate-400">Friends Joined</div>
@@ -159,7 +149,6 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
         </div>
       </div>
 
-      {/* Order History Section */}
       <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 backdrop-blur-xl space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-800">
           <div className="flex items-center gap-2">
@@ -213,7 +202,6 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
         </div>
       </div>
 
-      {/* Saved / Wishlist Items */}
       <div className="bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 backdrop-blur-xl space-y-4">
         <div className="flex items-center justify-between pb-3 border-b border-slate-800">
           <div className="flex items-center gap-2">
@@ -261,3 +249,5 @@ export const BuyerDashboard = ({ savedProducts, onOrderNow, onNavigateHome }: Bu
     </div>
   );
 };
+
+export default BuyerDashboard;
