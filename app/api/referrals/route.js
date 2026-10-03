@@ -1,9 +1,10 @@
 /**
- * Next.js App Router Route Handler: /api/referrals
- * Path: app/api/referrals/route.ts
+ * app/api/referrals/route.js
  * 
- * Growth & Viral Referral Tracking Engine.
+ * Next.js App Router Route Handler: /api/referrals
  */
+
+export const dynamic = 'force-dynamic';
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.SUPABASE_URL;
 const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
@@ -39,7 +40,7 @@ const REFERRAL_PERKS = [
   },
 ];
 
-export async function POST(req: Request) {
+export async function POST(req) {
   try {
     const body = await req.json();
     const { referrerCode, referredFingerprint, landingUrl } = body;
@@ -88,12 +89,12 @@ export async function POST(req: Request) {
         },
       }
     );
-  } catch (error: any) {
+  } catch (error) {
     return Response.json({ success: false, error: error.message }, { status: 500 });
   }
 }
 
-export async function GET(req: Request) {
+export async function GET(req) {
   const { searchParams } = new URL(req.url);
   const code = searchParams.get('code') || 'KHI-USER-77';
 
