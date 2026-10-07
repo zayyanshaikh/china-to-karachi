@@ -6,6 +6,7 @@ import EngagementTracker from '../components/EngagementTracker';
 export const metadata: Metadata = {
   title: 'China-to-Karachi Business Hub',
   description: 'Premier B2B & B2C marketplace for imported gadgets, RC vehicles, and electronics with integrated vendor network and smart deal analytics.',
+  icons: { icon: '/icon.png', apple: '/apple-icon.png' },
   openGraph: {
     title: 'China-to-Karachi Business Hub',
     description: 'Premier B2B & B2C marketplace for imported gadgets, RC vehicles, and electronics with integrated vendor network and smart deal analytics.',
