@@ -129,4 +129,4 @@ cp .env.example .env.local
 
 ## License
 
-Private repository &copy; China-to-Karachi Business Hub.
+  © 2026 Zayyan Shaikh. All rights reserved.
