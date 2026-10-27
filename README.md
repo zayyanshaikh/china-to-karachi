@@ -25,9 +25,9 @@ Premier B2B & B2C marketplace and sourcing platform for imported electronics, hi
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/your-username/china-to-karachi-hub.git
-cd china-to-karachi-hub
-npm install
+  git clone https://github.com/zayyanshaikh/china-to-karachi.git
+  cd china-to-karachi
+  npm install
 ```
 
 ### Development Server
